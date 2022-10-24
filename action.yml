@@ -1,4 +1,4 @@
-name: "Poetry Caching Actio "
+name: "Poetry Caching Action"
 description: "Reuse steps for using poetry, then cache the binary and dependencies"
 
 inputs:
