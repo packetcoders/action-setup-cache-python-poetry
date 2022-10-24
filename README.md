@@ -1,15 +1,16 @@
-# Poetry Caching Action
+# GitHub Action - Setup Python Poetry
 
 
 This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), provides caching for both the poetry binary, installs dependencies based on your `pyproject.toml` and `poetry.lock` and caches the dependencies.
 
-The cache invalidation is triggered when: 
+## Cache Creation
+What is the Cache populated?
 
-* **For poetry binary**<br/>The change of runner os, python version, and poetry version changed. It will create multiple caches if you are using a matrix strategy.
-* **For dependencies**<br/>The change of runner os and python version. If you change the content of `poetry.lock`, actions still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
+* **Poetry binary**<br/>The change of runner OS, Python version, and Poetry version have changed. It will create multiple caches if you are using a matrix strategy.
+* **Dependencies**<br/>The change of runner OS, Python version. If you change the content of `poetry.lock`, Actions will still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
 
 
-## Improvements:
+## Improvements
 
 1. Comparison with `snok/install-poetry` 
     * Usually takes ~10 seconds
@@ -31,17 +32,17 @@ pymysql-pool = "^0.3.7"
 cryptography = "^38.0.1"
 ```
 
-If you have more dependencies, GitHub Action will take more time to download from the cache server. Still, it's usually significant faster than downloading and installing it for every job and workflow.
+If you have more dependencies, GitHub Action will take more time to download from the cache server. Still, it's usually significantly faster than downloading and installing it for every job and workflow.
 
-## How to use
+## How to Use
 
 ### Simple Use Case
 
-We assume you already have `pyproject.toml`, `poetry.lock` and a test use case for `pytest` to run this workflow.
+We assume you already have `pyproject.toml`, `poetry.lock` and a test use case for `pytest` to run this workflow example.
 
-Ps:
+Note:
 
-* Your first `push to main`, the workflow will download poetry and dependencies then save it to the cache.
+* For your first `push` to `main`, the workflow will download poetry and dependencies and then save it to the cache.
 * Your second run *(whether it's on a different job, re-run the job or different workflow [based on your first cached commit](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache))* will use the cache and you can see the improvement.
 * You can see list of your cache in `Your Repo` -> `Actions` tab -> `Caches` under `Managements` (left navbar, at the bottom). [Don't forget the limitation of cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
@@ -63,7 +64,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
-        uses: packetcoders/poetry-caching-action@main
+        uses: packetcoders/action-setup-python-poetry@main
         with:
           python-version: 3.8
           poetry-version: 1.2.2
@@ -73,13 +74,12 @@ jobs:
       #----------------------------------------------
       - name: Run tests
         run: |
-          source .venv/bin/activate
           poetry run pytest
 ```
 
 ### Using [Matrix Strategy](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
 
-With matrix strategy, you will create several workflows run simultaneously with the combinations, for this case based on a combination of the python and poetry versions.
+With a matrix strategy, you will create several workflows that run simultaneously with the combinations, for this case based on a combination of the Python and Poetry versions.
 
 ```yml
 name: ci
@@ -104,7 +104,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
-        uses: packetcoders/poetry-caching-action@main
+        uses: packetcoders/action-setup-python-poetry@main
         with:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
@@ -114,6 +114,5 @@ jobs:
       #----------------------------------------------
       - name: Run tests
         run: |
-          source .venv/bin/activate
           poetry run pytest
 ```
