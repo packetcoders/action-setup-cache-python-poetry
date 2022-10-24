@@ -1,4 +1,4 @@
-# Poetry Caching Action
+# GitHub Action - Setup Python Poetry
 
 
 This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), provides caching for both the poetry binary, installs dependencies based on your `pyproject.toml` and `poetry.lock` and caches the dependencies.
