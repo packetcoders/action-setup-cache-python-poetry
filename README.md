@@ -4,7 +4,7 @@
 This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), provides caching for both the poetry binary, installs dependencies based on your `pyproject.toml` and `poetry.lock` and caches the dependencies.
 
 ## Cache Creation
-What is the Cache populated?
+When is the Cache populated?
 
 * **Poetry binary**<br/>The change of runner OS, Python version, and Poetry version have changed. It will create multiple caches if you are using a matrix strategy.
 * **Dependencies**<br/>The change of runner OS, Python version. If you change the content of `poetry.lock`, Actions will still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
