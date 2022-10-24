@@ -4,7 +4,7 @@
 This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), provides caching for both the poetry binary, installs dependencies based on your `pyproject.toml` and `poetry.lock` and caches the dependencies.
 
 ## Cache Creation
-When is the Cache populated?
+When is the cache populated?
 
 * **Poetry binary**<br/>The change of runner OS, Python version, and Poetry version have changed. It will create multiple caches if you are using a matrix strategy.
 * **Dependencies**<br/>The change of runner OS, Python version. If you change the content of `poetry.lock`, Actions will still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
@@ -31,7 +31,7 @@ We assume you already have `pyproject.toml`, `poetry.lock` and a test use case f
 Note:
 
 * For your first `push` to `main`, the workflow will download poetry and dependencies and then save it to the cache.
-* Your second run *(whether it's on a different job, re-run the job or different workflow [based on your first cached commit](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache))* will use the cache and you can see the improvement.
+* Your second run (whether it's on a different job, re-run the job or different workflow [based on your first cached commit](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache)) will use the cache and you can see the improvement.
 * You can see list of your cache in `Your Repo` -> `Actions` tab -> `Caches` under `Managements` (left navbar, at the bottom). [Don't forget the limitation of cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
 ```yml
