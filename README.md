@@ -64,7 +64,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
-        uses: packetcoders/poetry-caching-action@main
+        uses: packetcoders/action-setup-python-poetry@main
         with:
           python-version: 3.8
           poetry-version: 1.2.2
@@ -74,7 +74,6 @@ jobs:
       #----------------------------------------------
       - name: Run tests
         run: |
-          source .venv/bin/activate
           poetry run pytest
 ```
 
@@ -105,7 +104,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
-        uses: packetcoders/poetry-caching-action@main
+        uses: packetcoders/action-setup-python-poetry@main
         with:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
@@ -115,6 +114,5 @@ jobs:
       #----------------------------------------------
       - name: Run tests
         run: |
-          source .venv/bin/activate
           poetry run pytest
 ```
