@@ -20,19 +20,7 @@ When is the Cache populated?
     * Cache dependencies only will take 13-14 seconds
     * Cache poetry and dependencies will take 3-4 seconds 
 
-List of python dependencies for `#2`:
-
-```toml
-[tool.poetry.dependencies]
-python = ">3.8.1,<3.10"
-pydantic = {extras = ["dotenv"], version = "^1.10.2"}
-requests = "^2.28.1"
-PyMySQL = "^1.0.2"
-pymysql-pool = "^0.3.7"
-cryptography = "^38.0.1"
-```
-
-If you have more dependencies, GitHub Action will take more time to download from the cache server. Still, it's usually significantly faster than downloading and installing it for every job and workflow.
+**Note:** If you have more dependencies, GitHub Action will take more time to download from the cache server. Still, it's usually significantly faster than downloading and installing it for every job and workflow.
 
 ## How to Use
 
