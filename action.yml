@@ -1,5 +1,6 @@
 name: "Setup and Cache Python Poetry"
 description: "Python Poetry setup, including the caching of dependencies and Poetry install."
+icon: play
 
 inputs:
   python-version:
