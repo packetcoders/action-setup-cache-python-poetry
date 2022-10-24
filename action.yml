@@ -1,5 +1,5 @@
-name: "Poetry Caching Action"
-description: "Reuse steps for using poetry, then cache the binary and dependencies"
+name: "Setup Python Poetry"
+description: "Python Poetry setup, including the caching of dependencies and the Poetry install."
 
 inputs:
   python-version:
