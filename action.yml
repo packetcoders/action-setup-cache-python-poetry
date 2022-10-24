@@ -1,4 +1,4 @@
-name: "Setup/Cache Python Poetry"
+name: "Setup and Cache Python Poetry"
 description: "Python Poetry setup, including the caching of dependencies and Poetry install."
 
 inputs:
