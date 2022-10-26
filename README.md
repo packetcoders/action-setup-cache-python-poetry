@@ -33,9 +33,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      #------------------------------------
-      #  Check out repo and set up python
-      #------------------------------------
+      #-------------------------------------#
+      #  Check out repo and set up Python   #
+      #-------------------------------------#
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
@@ -44,9 +44,9 @@ jobs:
           python-version: 3.8
           poetry-version: 1.2.2
 
-      #------------------------------------
-      #  Run Your Actual Job
-      #------------------------------------
+      #------------------------#
+      #  Run your actual job   #
+      #------------------------#
       - name: Run tests
         run: |
           poetry run pytest
@@ -73,9 +73,9 @@ jobs:
         poetry-version: [1.2.2]
     runs-on: ubuntu-latest
     steps:
-      #------------------------------------
-      #  Check out repo and set up python
-      #------------------------------------
+      #------------------------------------#
+      #  Check out repo and set up Python  #
+      #------------------------------------#
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
@@ -84,9 +84,9 @@ jobs:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
 
-      #------------------------------------
-      #  Run Your Actual Job
-      #------------------------------------
+      #-----------------------#
+      #  Run your actual job  #
+      #-----------------------#
       - name: Run tests
         run: |
           poetry run pytest
