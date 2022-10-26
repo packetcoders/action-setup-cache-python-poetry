@@ -1,26 +1,13 @@
 # GitHub Action - Setup and Cache Python Poetry
 
 
-This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), provides caching for both the poetry binary, installs dependencies based on your `pyproject.toml` and `poetry.lock` and caches the dependencies.
+This action installs Poetry via [`snok/install-poetry`](https://github.com/snok/install-poetry), and also provides caching for the Poetry binary and your dependencies.
 
 ## Cache Creation
 When is the cache populated?
 
 * **Poetry binary**<br/>The change of runner OS, Python version, and Poetry version have changed. It will create multiple caches if you are using a matrix strategy.
-* **Dependencies**<br/>The change of runner OS, Python version. If you change the content of `poetry.lock`, Actions will still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
-
-
-## Improvements
-
-1. Comparison with `snok/install-poetry` 
-    * Usually takes ~10 seconds
-    * Cache poetry binary and it will take around 2-4 seconds
-1. Setup python + install poetry + install dependencies (list below) 
-    * Usually takes ~34 seconds 
-    * Cache dependencies only will take 13-14 seconds
-    * Cache poetry and dependencies will take 3-4 seconds 
-
-**Note:** If you have more dependencies, GitHub Action will take more time to download from the cache server. Still, it's usually significantly faster than downloading and installing it for every job and workflow.
+* **Dependencies**<br/>The change of runner OS, Python version. If you change the content of `poetry.lock`, this Action will still download the cache folder, run the `poetry install`, and then save it to the cache server. It will also create multiple caches if you are using a matrix strategy.
 
 ## How to Use
 
@@ -46,9 +33,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      #----------------------------------------------
-      # Check out repo and set up python
-      #----------------------------------------------
+      #------------------------------------
+      #  Check out repo and set up python
+      #------------------------------------
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
@@ -57,9 +44,9 @@ jobs:
           python-version: 3.8
           poetry-version: 1.2.2
 
-      #----------------------------------------------
-      #    Run Your Actual Job
-      #----------------------------------------------
+      #------------------------------------
+      #  Run Your Actual Job
+      #------------------------------------
       - name: Run tests
         run: |
           poetry run pytest
@@ -86,9 +73,9 @@ jobs:
         poetry-version: [1.2.2]
     runs-on: ubuntu-latest
     steps:
-      #----------------------------------------------
-      # Check out repo and set up python
-      #----------------------------------------------
+      #------------------------------------
+      #  Check out repo and set up python
+      #------------------------------------
       - name: Check out the repository
         uses: actions/checkout@v3
       - name: "Setup Python, Poetry and Dependencies"
@@ -97,9 +84,9 @@ jobs:
           python-version: ${{matrix.python-version}}
           poetry-version: ${{matrix.poetry-version}}
 
-      #----------------------------------------------
-      #    Run Your Actual Job
-      #----------------------------------------------
+      #------------------------------------
+      #  Run Your Actual Job
+      #------------------------------------
       - name: Run tests
         run: |
           poetry run pytest
