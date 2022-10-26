@@ -1,5 +1,5 @@
 name: "Setup and Cache Python Poetry"
-description: "Python Poetry setup, including the caching of dependencies and Poetry install."
+description: "Python Poetry setup, including the caching of dependencies."
 branding:
   icon: 'play'
   color: 'blue'
