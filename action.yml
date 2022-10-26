@@ -33,7 +33,6 @@ runs:
         path: ~/.local
         key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ inputs.poetry-version }}
     - name: Install Poetry
-      if: steps.cached-poetry-binary.outputs.cache-hit != 'true'
       uses: snok/install-poetry@v1
       with:
         version: ${{ inputs.poetry-version }}
