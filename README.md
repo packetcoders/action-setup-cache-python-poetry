@@ -87,6 +87,22 @@ jobs:
           poetry run pytest
 ```
 
+## Advanced usage
+
+### Passing extra arguments to `poetry install`
+
+By default the action will install your dendencies with `poetry install --no-interaction --no-root` You can specify extra arguments with `install-args`, e.g.
+
+```yml
+      - name: "Setup Python, Poetry and Dependencies"
+        uses: packetcoders/action-setup-cache-python-poetry@main
+        with:
+          python-version: "3.12"
+          poetry-version: "1.6.1"
+          install-args: --all-extras
+```
+to install any optional dependencies alongside the required ones.
+
 ## License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE).
