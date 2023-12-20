@@ -11,6 +11,10 @@ inputs:
   poetry-version:
     description: Poetry Version
     required: true
+  install-args:
+    description: Extra arguments to `poetry install`
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -46,7 +50,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: .venv
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}${{ inputs.install-args }}
         # Restore cache with this prefix if not exact match with key
         # Note cache-hit returns false in this case, so the below step will run
         restore-keys: |
@@ -57,4 +61,4 @@ runs:
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       shell: bash
-      run: poetry install --no-interaction --no-root
+      run: poetry install --no-interaction --no-root ${{ inputs.install-args }}
